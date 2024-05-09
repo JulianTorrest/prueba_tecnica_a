@@ -54,3 +54,10 @@ combined_df = read_and_concat_csv_files(base_url, file_names)
 # Mostrar el resultado en Streamlit
 st.write("### Datos combinados de los archivos CSV:")
 st.write(combined_df)
+
+# Ahora mostramos los otros DataFrames
+st.write("### Otros DataFrames:")
+st.write(locations_vaccines_df)
+st.write(vaccinations_by_manufacturer_df)
+locations_vaccines_df.head()
+vaccinations_by_manufacturer_df.head()
