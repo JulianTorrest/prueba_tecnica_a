@@ -55,9 +55,15 @@ combined_df = read_and_concat_csv_files(base_url, file_names)
 st.write("### Datos combinados de los archivos CSV:")
 st.write(combined_df)
 
-# Ahora mostramos los otros DataFrames
-st.write("### Otros DataFrames:")
+# Ahora mostramos los otros DataFrames con títulos
+st.write("### DataFrame: locations_vaccines_df")
 st.write(locations_vaccines_df)
+
+st.write("### DataFrame: vaccinations_by_manufacturer_df")
 st.write(vaccinations_by_manufacturer_df)
-locations_vaccines_df.head()
-vaccinations_by_manufacturer_df.head()
+
+st.write("### DataFrame: locations_vaccines_df")
+st.write(locations_vaccines_df.head())
+
+st.write("### DataFrame: vaccinations_by_manufacturer_df")
+st.write(vaccinations_by_manufacturer_df.head())
