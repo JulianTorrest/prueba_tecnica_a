@@ -161,7 +161,9 @@ st.write(covid_testing_all_observations_df.isnull().sum())
 
 # Matriz de correlación
 st.write("### Matriz de correlación")
-st.write(covid_testing_all_observations_df.corr())
+correlation_matrix = np.corrcoef(covid_testing_all_observations_df.select_dtypes(include=['float64']).values, rowvar=False)
+st.write(pd.DataFrame(correlation_matrix, columns=covid_testing_all_observations_df.select_dtypes(include=['float64']).columns, index=covid_testing_all_observations_df.select_dtypes(include=['float64']).columns))
+
 
 # Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df
 st.write("## Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df")
