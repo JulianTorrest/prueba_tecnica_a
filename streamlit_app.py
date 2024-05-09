@@ -40,5 +40,3 @@ plt.title(f'Cantidad de Vacunas Utilizadas en {selected_continent}')
 plt.xlabel('Cantidad de Vacunas')
 plt.ylabel('País')
 st.pyplot(plt)
-
-streamlit run app.py
