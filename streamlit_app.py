@@ -264,3 +264,24 @@ plt.tight_layout()
 
 # Mostrar el mapa de calor en Streamlit
 st.pyplot(plt)
+
+# Mostrar las opciones para el DataFrame vaccines_country_data_df
+st.write("### Opciones para el DataFrame vaccines_country_data_df")
+explore_dataframe(vaccines_country_data_df)
+
+# Mostrar las opciones para el DataFrame locations_vaccines_df
+st.write("### Opciones para el DataFrame locations_vaccines_df")
+explore_dataframe(locations_vaccines_df)
+
+# Mostrar las opciones para el DataFrame vaccinations_by_manufacturer_df
+st.write("### Opciones para el DataFrame vaccinations_by_manufacturer_df")
+explore_dataframe(vaccinations_by_manufacturer_df)
+
+# Mostrar las opciones para el DataFrame covid_testing_all_observations_df
+st.write("### Opciones para el DataFrame covid_testing_all_observations_df")
+explore_dataframe(covid_testing_all_observations_df)
+
+# Mostrar las opciones para el DataFrame covid_testing_latest_data_source_details_df
+st.write("### Opciones para el DataFrame covid_testing_latest_data_source_details_df")
+explore_dataframe(covid_testing_latest_data_source_details_df)
+
