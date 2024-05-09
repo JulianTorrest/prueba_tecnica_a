@@ -116,17 +116,14 @@ st.write(locations_vaccines_df.dtypes)
 st.write("### Valores faltantes")
 st.write(locations_vaccines_df.isnull().sum())
 
-# Estadísticas básicas para columnas numéricas
-st.write("### Estadísticas básicas para columnas numéricas")
-st.write(locations_vaccines_df.select_dtypes(include=['float64', 'int64']).describe())
-
-# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
-st.write("### Visualización de algunas columnas relevantes")
-st.write(locations_vaccines_df.head())
-
-# Matriz de correlación (si es relevante)
-st.write("### Matriz de correlación")
-st.write(locations_vaccines_df.corr())
+# Verificar si hay columnas numéricas
+numeric_cols = locations_vaccines_df.select_dtypes(include=['float64', 'int64']).columns
+if len(numeric_cols) > 0:
+    # Estadísticas básicas para columnas numéricas
+    st.write("### Estadísticas básicas para columnas numéricas")
+    st.write(locations_vaccines_df[numeric_cols].describe())
+else:
+    st.write("No hay columnas numéricas en este DataFrame.")
 
 # Análisis exploratorio del DataFrame vaccinations_by_manufacturer_df
 st.write("## Análisis exploratorio del DataFrame vaccinations_by_manufacturer_df")
