@@ -98,6 +98,8 @@ st.write(vaccines_country_data_df.head())
 if len(numeric_cols) > 1:
     st.write("### Matriz de correlación")
     st.write(vaccines_country_data_df.corr())
+else:
+    st.write("No hay suficientes columnas numéricas para calcular la matriz de correlación.")
 
 # Análisis exploratorio del DataFrame locations_vaccines_df
 st.write("## Análisis exploratorio del DataFrame locations_vaccines_df")
