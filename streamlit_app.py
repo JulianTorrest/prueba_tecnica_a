@@ -211,3 +211,13 @@ numeric_cols_latest = covid_testing_latest_data_source_details_df.select_dtypes(
 st.write("### Matriz de correlación para columnas numéricas")
 st.write(numeric_cols_latest.corr())
 
+# Graficar el mapa de calor
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+plt.title('Matriz de correlación para columnas numéricas')
+plt.xlabel('Columnas')
+plt.ylabel('Columnas')
+plt.xticks(rotation=45)
+plt.yticks(rotation=45)
+plt.tight_layout()
+plt.show()
