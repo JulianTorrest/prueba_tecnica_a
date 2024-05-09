@@ -267,21 +267,26 @@ st.pyplot(plt)
 
 # Mostrar las opciones para el DataFrame vaccines_country_data_df
 st.write("### Opciones para el DataFrame vaccines_country_data_df")
+# Aquí debes cargar y asignar a vaccines_country_data_df el DataFrame que desees analizar
 explore_dataframe(vaccines_country_data_df)
 
 # Mostrar las opciones para el DataFrame locations_vaccines_df
 st.write("### Opciones para el DataFrame locations_vaccines_df")
+# Aquí debes cargar y asignar a locations_vaccines_df el DataFrame que desees analizar
 explore_dataframe(locations_vaccines_df)
 
 # Mostrar las opciones para el DataFrame vaccinations_by_manufacturer_df
 st.write("### Opciones para el DataFrame vaccinations_by_manufacturer_df")
+# Aquí debes cargar y asignar a vaccinations_by_manufacturer_df el DataFrame que desees analizar
 explore_dataframe(vaccinations_by_manufacturer_df)
 
 # Mostrar las opciones para el DataFrame covid_testing_all_observations_df
 st.write("### Opciones para el DataFrame covid_testing_all_observations_df")
+# Aquí debes cargar y asignar a covid_testing_all_observations_df el DataFrame que desees analizar
 explore_dataframe(covid_testing_all_observations_df)
 
 # Mostrar las opciones para el DataFrame covid_testing_latest_data_source_details_df
 st.write("### Opciones para el DataFrame covid_testing_latest_data_source_details_df")
+# Aquí debes cargar y asignar a covid_testing_latest_data_source_details_df el DataFrame que desees analizar
 explore_dataframe(covid_testing_latest_data_source_details_df)
 
