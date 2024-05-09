@@ -66,6 +66,39 @@ st.write(covid_testing_all_observations_df)
 st.write("### DataFrame: covid_testing_latest_data_source_details_df")
 st.write(covid_testing_latest_data_source_details_df)
 
+# Análisis exploratorio del DataFrame vaccines_country_data_df
+st.write("## Análisis exploratorio del DataFrame vaccines_country_data_df")
+
+# Descripción del DataFrame
+st.write("### Descripción del DataFrame")
+st.write(vaccines_country_data_df.describe())
+
+# Tipos de columnas
+st.write("### Tipos de columnas")
+st.write(vaccines_country_data_df.dtypes)
+
+# Valores faltantes
+st.write("### Valores faltantes")
+st.write(vaccines_country_data_df.isnull().sum())
+
+# Verificar si hay columnas numéricas
+numeric_cols = vaccines_country_data_df.select_dtypes(include=['float64', 'int64']).columns
+if len(numeric_cols) > 0:
+    # Estadísticas básicas para columnas numéricas
+    st.write("### Estadísticas básicas para columnas numéricas")
+    st.write(vaccines_country_data_df[numeric_cols].describe())
+else:
+    st.write("No hay columnas numéricas en este DataFrame.")
+
+# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
+st.write("### Visualización de algunas columnas relevantes")
+st.write(vaccines_country_data_df.head())
+
+# Matriz de correlación (si es relevante)
+if len(numeric_cols) > 1:
+    st.write("### Matriz de correlación")
+    st.write(vaccines_country_data_df.corr())
+
 # Análisis exploratorio del DataFrame locations_vaccines_df
 st.write("## Análisis exploratorio del DataFrame locations_vaccines_df")
 
@@ -92,4 +125,85 @@ st.write(locations_vaccines_df.head())
 # Matriz de correlación (si es relevante)
 st.write("### Matriz de correlación")
 st.write(locations_vaccines_df.corr())
+
+# Análisis exploratorio del DataFrame vaccinations_by_manufacturer_df
+st.write("## Análisis exploratorio del DataFrame vaccinations_by_manufacturer_df")
+
+# Descripción del DataFrame
+st.write("### Descripción del DataFrame")
+st.write(vaccinations_by_manufacturer_df.describe())
+
+# Tipos de columnas
+st.write("### Tipos de columnas")
+st.write(vaccinations_by_manufacturer_df.dtypes)
+
+# Valores faltantes
+st.write("### Valores faltantes")
+st.write(vaccinations_by_manufacturer_df.isnull().sum())
+
+# Estadísticas básicas para columnas numéricas
+st.write("### Estadísticas básicas para columnas numéricas")
+st.write(vaccinations_by_manufacturer_df.select_dtypes(include=['float64', 'int64']).describe())
+
+# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
+st.write("### Visualización de algunas columnas relevantes")
+st.write(vaccinations_by_manufacturer_df.head())
+
+# Matriz de correlación (si es relevante)
+st.write("### Matriz de correlación")
+st.write(vaccinations_by_manufacturer_df.corr())
+
+# Análisis exploratorio del DataFrame covid_testing_all_observations_df
+st.write("## Análisis exploratorio del DataFrame covid_testing_all_observations_df")
+
+# Descripción del DataFrame
+st.write("### Descripción del DataFrame")
+st.write(covid_testing_all_observations_df.describe())
+
+# Tipos de columnas
+st.write("### Tipos de columnas")
+st.write(covid_testing_all_observations_df.dtypes)
+
+# Valores faltantes
+st.write("### Valores faltantes")
+st.write(covid_testing_all_observations_df.isnull().sum())
+
+# Estadísticas básicas para columnas numéricas
+st.write("### Estadísticas básicas para columnas numéricas")
+st.write(covid_testing_all_observations_df.select_dtypes(include=['float64', 'int64']).describe())
+
+# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
+st.write("### Visualización de algunas columnas relevantes")
+st.write(covid_testing_all_observations_df.head())
+
+# Matriz de correlación (si es relevante)
+st.write("### Matriz de correlación")
+st.write(covid_testing_all_observations_df.corr())
+
+# Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df
+st.write("## Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df")
+
+# Descripción del DataFrame
+st.write("### Descripción del DataFrame")
+st.write(covid_testing_latest_data_source_details_df.describe())
+
+# Tipos de columnas
+st.write("### Tipos de columnas")
+st.write(covid_testing_latest_data_source_details_df.dtypes)
+
+# Valores faltantes
+st.write("### Valores faltantes")
+st.write(covid_testing_latest_data_source_details_df.isnull().sum())
+
+# Estadísticas básicas para columnas numéricas
+st.write("### Estadísticas básicas para columnas numéricas")
+st.write(covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).describe())
+
+# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
+st.write("### Visualización de algunas columnas relevantes")
+st.write(covid_testing_latest_data_source_details_df.head())
+
+# Matriz de correlación (si es relevante)
+st.write("### Matriz de correlación")
+st.write(covid_testing_latest_data_source_details_df.corr())
 
