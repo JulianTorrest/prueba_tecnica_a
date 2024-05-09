@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Función para leer y concatenar archivos CSV
 def read_and_concat_csv_files(base_url, file_names):
