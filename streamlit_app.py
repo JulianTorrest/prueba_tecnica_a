@@ -34,6 +34,3 @@ for file_name in file_names:
 
 # Concatenar todos los DataFrames en uno solo
 combined_df = pd.concat(dfs, ignore_index=True)
-
-# Ahora tienes un solo DataFrame combinado que contiene los datos de todos los archivos CSV en la carpeta
-print(combined_df.head())  # Muestra las primeras filas del DataFrame combinado
