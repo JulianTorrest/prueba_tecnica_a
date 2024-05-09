@@ -49,6 +49,13 @@ file_url4 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/ma
 # Cargar los datos desde la URL
 covid_testing_latest_data_source_details_df = pd.read_csv(file_url4)
 
+# Eliminar valores faltantes
+vaccines_country_data_df.dropna(inplace=True)
+locations_vaccines_df.dropna(inplace=True)
+vaccinations_by_manufacturer_df.dropna(inplace=True)
+covid_testing_all_observations_df.dropna(inplace=True)
+covid_testing_latest_data_source_details_df.dropna(inplace=True)
+
 # Mostrar el resultado en Streamlit
 st.write("### Dataframe: vaccines_country_data_df")
 st.write(vaccines_country_data_df)
