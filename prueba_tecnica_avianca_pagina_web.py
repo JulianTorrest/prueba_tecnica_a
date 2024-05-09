@@ -10,9 +10,8 @@ Original file is located at
 !pip install pandas
 import pandas as pd
 
-!pip install streamlit
-
-!git clone https://github.com/JulianTorrest/prueba_tecnica_a.git
+pip install pandas streamlit
+git clone https://github.com/JulianTorrest/prueba_tecnica_a.git
 
 import os
 os.chdir('prueba_tecnica_a')
@@ -186,3 +185,5 @@ if all_data:
     combined_data_vaccines_country = pd.concat(all_data, ignore_index=True)
 else:
     print("No se encontraron datos para combinar.")
+
+streamlit run app.py
