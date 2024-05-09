@@ -1,31 +1,5 @@
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# URL cruda del archivo CSV en GitHub
-file_url1 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/vaccines/locations.csv'
-
-# Cargar los datos desde la URL
-locations_vaccines_df = pd.read_csv(file_url1)
-
-# URL cruda del archivo CSV en GitHub
-file_url2 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/vaccines/vaccinations-by-manufacturer.csv'
-
-# Cargar los datos desde la URL
-vaccinations_by_manufacturer_df = pd.read_csv(file_url2)
-
-# URL cruda del archivo CSV en GitHub
-file_url3 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-all-observations.csv'
-
-# Cargar los datos desde la URL
-locations_vaccines_df = pd.read_csv(file_url3)
-
-# URL cruda del archivo CSV en GitHub
-file_url4 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-latest-data-source-details.csv'
-
-# Cargar los datos desde la URL
-locations_vaccines_df = pd.read_csv(file_url4)
 
 # Función para leer y concatenar archivos CSV
 def read_and_concat_csv_files(base_url, file_names):
@@ -49,11 +23,35 @@ file_names = [
 ]
 
 # Leer y concatenar los archivos CSV
-combined_df = read_and_concat_csv_files(base_url, file_names)
+vaccines_country_data_df = read_and_concat_csv_files(base_url, file_names)
+
+# URL cruda del archivo CSV en GitHub
+file_url1 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/vaccines/locations.csv'
+
+# Cargar los datos desde la URL
+locations_vaccines_df = pd.read_csv(file_url1)
+
+# URL cruda del archivo CSV en GitHub
+file_url2 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/vaccines/vaccinations-by-manufacturer.csv'
+
+# Cargar los datos desde la URL
+vaccinations_by_manufacturer_df = pd.read_csv(file_url2)
+
+# URL cruda del archivo CSV en GitHub
+file_url3 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-all-observations.csv'
+
+# Cargar los datos desde la URL
+covid_testing_all_observations_df = pd.read_csv(file_url3)
+
+# URL cruda del archivo CSV en GitHub
+file_url4 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-latest-data-source-details.csv'
+
+# Cargar los datos desde la URL
+covid_testing_latest_data_source_details_df = pd.read_csv(file_url4)
 
 # Mostrar el resultado en Streamlit
-st.write("### Datos combinados de los archivos CSV:")
-st.write(combined_df)
+st.write("### Dataframe: vaccines_country_data_df")
+st.write(vaccines_country_data_df)
 
 # Ahora mostramos los otros DataFrames con títulos
 st.write("### DataFrame: locations_vaccines_df")
@@ -62,8 +60,9 @@ st.write(locations_vaccines_df)
 st.write("### DataFrame: vaccinations_by_manufacturer_df")
 st.write(vaccinations_by_manufacturer_df)
 
-st.write("### DataFrame: locations_vaccines_df")
-st.write(locations_vaccines_df.head())
+st.write("### DataFrame: covid_testing_all_observations_df")
+st.write(covid_testing_all_observations_df)
 
-st.write("### DataFrame: vaccinations_by_manufacturer_df")
-st.write(vaccinations_by_manufacturer_df.head())
+st.write("### DataFrame: covid_testing_latest_data_source_details_df")
+st.write(covid_testing_latest_data_source_details_df)
+
