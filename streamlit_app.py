@@ -144,7 +144,6 @@ st.write(vaccinations_by_manufacturer_df.isnull().sum())
 st.write("### Matriz de correlación")
 st.write(vaccinations_by_manufacturer_df[['total_vaccinations']].corr())
 
-
 # Análisis exploratorio del DataFrame covid_testing_all_observations_df
 st.write("## Análisis exploratorio del DataFrame covid_testing_all_observations_df")
 
@@ -160,15 +159,7 @@ st.write(covid_testing_all_observations_df.dtypes)
 st.write("### Valores faltantes")
 st.write(covid_testing_all_observations_df.isnull().sum())
 
-# Estadísticas básicas para columnas numéricas
-st.write("### Estadísticas básicas para columnas numéricas")
-st.write(covid_testing_all_observations_df.select_dtypes(include=['float64', 'int64']).describe())
-
-# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
-st.write("### Visualización de algunas columnas relevantes")
-st.write(covid_testing_all_observations_df.head())
-
-# Matriz de correlación (si es relevante)
+# Matriz de correlación
 st.write("### Matriz de correlación")
 st.write(covid_testing_all_observations_df.corr())
 
