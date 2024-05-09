@@ -8,3 +8,9 @@ file_url = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/mai
 
 # Cargar los datos desde la URL
 locations_vaccines_df = pd.read_csv(file_url)
+
+# URL cruda del archivo CSV en GitHub
+file_url = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/vaccines/vaccinations-by-manufacturer.csv'
+
+# Cargar los datos desde la URL
+vaccinations-by-manufacturer_df = pd.read_csv(file_url)
