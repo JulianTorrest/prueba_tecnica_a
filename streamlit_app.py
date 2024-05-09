@@ -15,6 +15,18 @@ file_url2 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/ma
 # Cargar los datos desde la URL
 vaccinations_by_manufacturer_df = pd.read_csv(file_url2)
 
+# URL cruda del archivo CSV en GitHub
+file_url3 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-all-observations.csv'
+
+# Cargar los datos desde la URL
+locations_vaccines_df = pd.read_csv(file_url3)
+
+# URL cruda del archivo CSV en GitHub
+file_url4 = 'https://raw.githubusercontent.com/JulianTorrest/prueba_tecnica_a/main/testing/covid-testing-latest-data-source-details.csv'
+
+# Cargar los datos desde la URL
+locations_vaccines_df = pd.read_csv(file_url4)
+
 # Función para leer y concatenar archivos CSV
 def read_and_concat_csv_files(base_url, file_names):
     dfs = []
