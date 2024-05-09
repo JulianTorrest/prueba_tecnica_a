@@ -66,3 +66,29 @@ st.write(covid_testing_all_observations_df)
 st.write("### DataFrame: covid_testing_latest_data_source_details_df")
 st.write(covid_testing_latest_data_source_details_df)
 
+# Análisis exploratorio del DataFrame locations_vaccines_df
+st.write("## Análisis exploratorio del DataFrame locations_vaccines_df")
+
+# Descripción del DataFrame
+st.write("### Descripción del DataFrame")
+st.write(locations_vaccines_df.describe())
+
+# Tipos de columnas
+st.write("### Tipos de columnas")
+st.write(locations_vaccines_df.dtypes)
+
+# Valores faltantes
+st.write("### Valores faltantes")
+st.write(locations_vaccines_df.isnull().sum())
+
+# Estadísticas básicas para columnas numéricas
+st.write("### Estadísticas básicas para columnas numéricas")
+st.write(locations_vaccines_df.select_dtypes(include=['float64', 'int64']).describe())
+
+# Visualización de algunas columnas relevantes (por ejemplo, las primeras 5 filas)
+st.write("### Visualización de algunas columnas relevantes")
+st.write(locations_vaccines_df.head())
+
+# Matriz de correlación (si es relevante)
+st.write("### Matriz de correlación")
+st.write(locations_vaccines_df.corr())
