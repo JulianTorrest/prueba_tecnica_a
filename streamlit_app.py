@@ -174,9 +174,12 @@ st.write(covid_testing_all_observations_df.select_dtypes(include=['float64', 'in
 st.write("### Visualización de algunas columnas relevantes")
 st.write(covid_testing_all_observations_df.head())
 
-# Matriz de correlación (si es relevante)
-st.write("### Matriz de correlación")
-st.write(covid_testing_all_observations_df.corr())
+# Seleccionar solo las columnas numéricas
+numeric_cols = covid_testing_all_observations_df.select_dtypes(include=['float64', 'int64'])
+
+# Matriz de correlación para las columnas numéricas
+st.write("### Matriz de correlación para columnas numéricas")
+st.write(numeric_cols.corr())
 
 # Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df
 st.write("## Análisis exploratorio del DataFrame covid_testing_latest_data_source_details_df")
