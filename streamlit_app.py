@@ -319,20 +319,20 @@ covid_testing_all_observations_df.drop(['ISO code', 'Source URL'], axis=1, inpla
 # Eliminación de columnas irrelevantes
 covid_testing_latest_data_source_details_df.drop(['ISO code', 'Source URL', 'General source label'], axis=1, inplace=True)
 
-# Codificación de variables categóricas usando OneHotEncoder
-encoder = OneHotEncoder(sparse=False, drop='first')
-encoded_features = encoder.fit_transform(vaccines_country_data_df[['vaccine']])
-encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(['vaccine']))
+# Verificar si hay columnas numéricas
+numeric_cols = covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).columns
+if len(numeric_cols) > 0:
+    # Estadísticas básicas para columnas numéricas
+    st.write("### Estadísticas básicas para columnas numéricas")
+    st.write(covid_testing_latest_data_source_details_df[numeric_cols].describe())
+else:
+    st.write("No hay columnas numéricas en este DataFrame.")
 
-# Visualización de datos codificados
-st.write("### Datos codificados:")
-st.write(encoded_df)
-
-# Normalización de características numéricas
-scaler = StandardScaler()
-numeric_cols = ['total_vaccinations', 'people_vaccinated', 'people_fully_vaccinated']
-vaccines_country_data_df[numeric_cols] = scaler.fit_transform(vaccines_country_data_df[numeric_cols])
-
-# Visualización después de la normalización
-st.write("### Después de la normalización:")
-st.write(vaccines_country_data_df.describe())
+# Encodificar variables categóricas
+categorical_columns = ['Country']
+encoded_df = encode_categorical(vaccines_country_data_df, categorical_columns)
+if encoded_df is not None:
+    st.write("### DataFrame codificado:")
+    st.write(encoded_df)
+else:
+    st.write("La codificación de variables categóricas no se pudo realizar debido a valores faltantes o columnas no categóricas.")
