@@ -445,6 +445,7 @@ models = {
 }
 
 # Entrenar y evaluar modelos
+results = {}
 for name, model in models.items():
     model_pipeline = Pipeline(steps=[
         ('preprocessor', preprocessor),
@@ -453,6 +454,26 @@ for name, model in models.items():
     model_pipeline.fit(X_train, y_train)
     train_score = model_pipeline.score(X_train, y_train)
     test_score = model_pipeline.score(X_test, y_test)
-    print(f"{name}:")
-    print(f"  Training R^2 Score: {train_score:.4f}")
-    print(f"  Testing R^2 Score: {test_score:.4f}")
+    y_pred = model_pipeline.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    results[name] = {
+        "Training R^2 Score": train_score,
+        "Testing R^2 Score": test_score,
+        "Mean Squared Error": mse
+    }
+
+# Encontrar el mejor modelo
+best_model_name = max(results, key=lambda x: results[x]["Testing R^2 Score"])
+best_model_scores = results[best_model_name]
+
+# Mostrar resultados en Streamlit
+st.title("Resultados de los Modelos de Predicción")
+st.write("Mejor Modelo:", best_model_name)
+st.write("R^2 Score (Entrenamiento):", best_model_scores["Training R^2 Score"])
+st.write("R^2 Score (Prueba):", best_model_scores["Testing R^2 Score"])
+st.write("Error Cuadrático Medio:", best_model_scores["Mean Squared Error"])
+
+# Crear y mostrar la matriz de confusión para el mejor modelo
+st.subheader("Matriz de Confusión para el Mejor Modelo")
+
+
