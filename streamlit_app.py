@@ -472,8 +472,3 @@ st.write("Mejor Modelo:", best_model_name)
 st.write("R^2 Score (Entrenamiento):", best_model_scores["Training R^2 Score"])
 st.write("R^2 Score (Prueba):", best_model_scores["Testing R^2 Score"])
 st.write("Error Cuadrático Medio:", best_model_scores["Mean Squared Error"])
-
-# Crear y mostrar la matriz de confusión para el mejor modelo
-st.subheader("Matriz de Confusión para el Mejor Modelo")
-
-
