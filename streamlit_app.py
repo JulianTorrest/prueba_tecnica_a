@@ -353,6 +353,35 @@ plot_eda_streamlit(vaccinations_by_manufacturer_df, "vaccinations_by_manufacture
 plot_eda_streamlit(covid_testing_all_observations_df, "covid_testing_all_observations_df")
 plot_eda_streamlit(covid_testing_latest_data_source_details_df, "covid_testing_latest_data_source_details_df")
 
+# Función para graficar vacunas por país
+def plot_vaccines_by_country(df):
+    st.write("## Vacunas por país")
+    country = st.selectbox("Seleccionar país", df['country'].unique())
+    data = df[df['country'] == country]
+    st.line_chart(data['total_vaccinations'])
+
+# Función para graficar vacunas por fecha
+def plot_vaccines_by_date(df):
+    st.write("## Vacunas por fecha")
+    df['date'] = pd.to_datetime(df['date'])
+    start_date = st.date_input("Seleccionar fecha de inicio", min(df['date']))
+    end_date = st.date_input("Seleccionar fecha de fin", max(df['date']))
+    data = df[(df['date'] >= start_date) & (df['date'] <= end_date)]
+    st.line_chart(data.set_index('date')['total_vaccinations'])
+
+# Función principal
+def main():
+    st.title("Análisis de vacunas COVID-19")
+    st.sidebar.title("Menú")
+
+    # Mostrar opciones del menú
+    menu = st.sidebar.selectbox("Seleccionar una opción", ["Vacunas por país", "Vacunas por fecha"])
+
+    # Según la opción seleccionada, mostrar el gráfico correspondiente
+    if menu == "Vacunas por país":
+        plot_vaccines_by_country(vaccines_country_data_df)
+    elif menu == "Vacunas por fecha":
+        plot_vaccines_by_date(vaccines_country_data_df)
 
 # Verificar si hay columnas numéricas
 numeric_cols = covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).columns
@@ -382,3 +411,6 @@ def encode_categorical(df, categorical_columns):
     encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(categorical_columns))
     
     return encoded_df
+
+if __name__ == "__main__":
+    main()
