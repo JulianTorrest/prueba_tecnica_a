@@ -265,6 +265,21 @@ plt.tight_layout()
 # Mostrar el mapa de calor en Streamlit
 st.pyplot(plt)
 
+def explore_dataframe(df):
+    """
+    Muestra los valores únicos de las columnas categóricas y calcula estadísticas básicas para las numéricas.
+
+    Parámetros:
+    - df (DataFrame): El DataFrame que se desea explorar.
+    """
+    st.write("### Valores únicos de las columnas categóricas:")
+    for column in df.select_dtypes(include=['object']).columns:
+        st.write(f"#### {column}")
+        st.write(df[column].unique())
+
+    st.write("### Estadísticas básicas de las columnas numéricas:")
+    st.write(df.describe())
+
 # Mostrar las opciones para el DataFrame vaccines_country_data_df
 st.write("### Opciones para el DataFrame vaccines_country_data_df")
 # Aquí debes cargar y asignar a vaccines_country_data_df el DataFrame que desees analizar
