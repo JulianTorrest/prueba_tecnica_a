@@ -328,19 +328,22 @@ if len(numeric_cols) > 0:
 else:
     st.write("No hay columnas numéricas en este DataFrame.")
 
-# Función para codificar variables categóricas
 def encode_categorical(df, categorical_columns):
-    encoder = OneHotEncoder(sparse=False, drop='first')
-    encoded_features = encoder.fit_transform(df[categorical_columns])
-    encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(categorical_columns))
-    return encoded_df
+    # Eliminar filas con valores faltantes en columnas categóricas
+    df.dropna(subset=categorical_columns, inplace=True)
     
-# Encodificar variables categóricas
-categorical_columns = ['Country']
-encoded_df = encode_categorical(vaccines_country_data_df, categorical_columns)
-if encoded_df is not None:
-    st.write("### DataFrame codificado:")
-    st.write(encoded_df)
-else:
-    st.write("La codificación de variables categóricas no se pudo realizar debido a valores faltantes o columnas no categóricas.")
-
+    # Verificar si quedan columnas categóricas después de eliminar los valores faltantes
+    if len(categorical_columns) == 0:
+        st.warning("No hay columnas categóricas después de eliminar los valores faltantes.")
+        return None
+    
+    # Crear el codificador OneHotEncoder
+    encoder = OneHotEncoder(sparse=False, drop='first')
+    
+    # Codificar las columnas categóricas
+    encoded_features = encoder.fit_transform(df[categorical_columns])
+    
+    # Crear un DataFrame con las características codificadas
+    encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(categorical_columns))
+    
+    return encoded_df
