@@ -382,7 +382,7 @@ def main():
         plot_vaccines_by_country(vaccines_country_data_df)
     elif menu == "Vacunas por fecha":
         plot_vaccines_by_date(vaccines_country_data_df)
-
+        
 # Verificar si hay columnas numéricas
 numeric_cols = covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).columns
 if len(numeric_cols) > 0:
