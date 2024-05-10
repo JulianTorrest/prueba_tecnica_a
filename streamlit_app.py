@@ -2,10 +2,8 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
-
 
 # Función para leer y concatenar archivos CSV
 def read_and_concat_csv_files(base_url, file_names):
@@ -322,34 +320,19 @@ covid_testing_all_observations_df.drop(['ISO code', 'Source URL'], axis=1, inpla
 covid_testing_latest_data_source_details_df.drop(['ISO code', 'Source URL', 'General source label'], axis=1, inplace=True)
 
 # Codificación de variables categóricas usando OneHotEncoder
-def encode_categorical(df, categorical_columns):
-    encoder = OneHotEncoder(sparse=False, drop='first')
-    encoded_features = encoder.fit_transform(df[categorical_columns])
-    encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(categorical_columns))
-    return encoded_df
+encoder = OneHotEncoder(sparse=False, drop='first')
+encoded_features = encoder.fit_transform(vaccines_country_data_df[['vaccine']])
+encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(['vaccine']))
 
-# Creación de nuevas características
-def create_new_features(df):
-    # Por ejemplo, podríamos extraer el mes y el día de la semana de la columna 'date'
-    df['month'] = pd.to_datetime(df['date']).dt.month
-    df['day_of_week'] = pd.to_datetime(df['date']).dt.dayofweek
-    return df
+# Visualización de datos codificados
+st.write("### Datos codificados:")
+st.write(encoded_df)
 
 # Normalización de características numéricas
-def normalize_numerical(df, numerical_columns):
-    scaler = StandardScaler()
-    df[numerical_columns] = scaler.fit_transform(df[numerical_columns])
-    return df
+scaler = StandardScaler()
+numeric_cols = ['total_vaccinations', 'people_vaccinated', 'people_fully_vaccinated']
+vaccines_country_data_df[numeric_cols] = scaler.fit_transform(vaccines_country_data_df[numeric_cols])
 
-# Aplicar la ingeniería de características a cada DataFrame
-vaccines_country_data_df_encoded = encode_categorical(vaccines_country_data_df, ['vaccine'])
-vaccines_country_data_df_with_features = create_new_features(vaccines_country_data_df)
-vaccines_country_data_df_normalized = normalize_numerical(vaccines_country_data_df_with_features, ['total_vaccinations', 'people_vaccinated', 'people_fully_vaccinated'])
-
-locations_vaccines_df_encoded = encode_categorical(locations_vaccines_df, ['vaccines'])
-
-covid_testing_all_observations_df_with_features = create_new_features(covid_testing_all_observations_df)
-covid_testing_all_observations_df_normalized = normalize_numerical(covid_testing_all_observations_df_with_features, ['Daily change in cumulative total', 'Cumulative total', 'Cumulative total per thousand', 'Daily change in cumulative total per thousand', '7-day smoothed daily change', '7-day smoothed daily change per thousand', 'Short-term positive rate', 'Short-term tests per case'])
-
-covid_testing_latest_data_source_details_df_with_features = create_new_features(covid_testing_latest_data_source_details_df)
-covid_testing_latest_data_source_details_df_normalized = normalize_numerical(covid_testing_latest_data_source_details_df_with_features, ['Number of observations', 'Cumulative total', 'Cumulative total per thousand', 'Daily change in cumulative total', 'Daily change in cumulative total per thousand', '7-day smoothed daily change', '7-day smoothed daily change per thousand', 'Short-term positive rate', 'Short-term tests per case'])
+# Visualización después de la normalización
+st.write("### Después de la normalización:")
+st.write(vaccines_country_data_df.describe())
