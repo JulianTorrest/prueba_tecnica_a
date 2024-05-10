@@ -372,6 +372,12 @@ plot_eda(covid_testing_all_observations_df, "covid_testing_all_observations_df")
 # Graficar EDA para el DataFrame covid_testing_latest_data_source_details_df
 plot_eda(covid_testing_latest_data_source_details_df, "covid_testing_latest_data_source_details_df")
 
+# Mostrar gráficos EDA para cada DataFrame en Streamlit
+plot_eda_streamlit(vaccines_country_data_df, "vaccines_country_data_df")
+plot_eda_streamlit(locations_vaccines_df, "locations_vaccines_df")
+plot_eda_streamlit(vaccinations_by_manufacturer_df, "vaccinations_by_manufacturer_df")
+plot_eda_streamlit(covid_testing_all_observations_df, "covid_testing_all_observations_df")
+plot_eda_streamlit(covid_testing_latest_data_source_details_df, "covid_testing_latest_data_source_details_df")
 
 # Verificar si hay columnas numéricas
 numeric_cols = covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).columns
