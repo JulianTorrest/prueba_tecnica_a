@@ -305,3 +305,14 @@ st.write("### Opciones para el DataFrame covid_testing_latest_data_source_detail
 # Aquí debes cargar y asignar a covid_testing_latest_data_source_details_df el DataFrame que desees analizar
 explore_dataframe(covid_testing_latest_data_source_details_df)
 
+# Eliminación de columnas irrelevantes
+vaccines_country_data_df.drop(['source_url'], axis=1, inplace=True)
+
+# Eliminación de columnas irrelevantes
+locations_vaccines_df.drop(['iso_code'], axis=1, inplace=True)
+
+# Eliminación de columnas irrelevantes
+covid_testing_all_observations_df.drop(['ISO code', 'Source URL'], axis=1, inplace=True)
+
+# Eliminación de columnas irrelevantes
+covid_testing_latest_data_source_details_df.drop(['ISO code', 'Source URL', 'General source label'], axis=1, inplace=True)
