@@ -396,36 +396,56 @@ from sklearn.svm import SVR
 from sklearn.neural_network import MLPRegressor
 from xgboost import XGBRegressor
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.linear_model import LinearRegression
+from sklearn.svm import SVR
+from sklearn.neighbors import KNeighborsRegressor
 
-# Split de datos
+# Dividir los datos en características (X) y objetivo (y)
 X = vaccines_country_data_df.drop(columns=['total_vaccinations'])
 y = vaccines_country_data_df['total_vaccinations']
+
+# Dividir los datos en conjunto de entrenamiento y conjunto de prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Modelos
+# Definir transformadores para datos numéricos y categóricos
+numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
+categorical_features = X.select_dtypes(include=['object']).columns
+
+numeric_transformer = Pipeline(steps=[
+    ('scaler', StandardScaler())
+])
+
+categorical_transformer = Pipeline(steps=[
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
+])
+
+# Combinar transformadores
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat', categorical_transformer, categorical_features)
+    ])
+
+# Definir modelos
 models = {
     "Linear Regression": LinearRegression(),
-    "Ridge Regression": Ridge(),
-    "Lasso Regression": Lasso(),
-    "ElasticNet": ElasticNet(),
-    "Random Forest": RandomForestRegressor(),
-    "Gradient Boosting": GradientBoostingRegressor(),
-    "AdaBoost": AdaBoostRegressor(),
-    "Support Vector Machine": SVR(),
-    "Neural Network": MLPRegressor(max_iter=1000),
-    "XGBoost": XGBRegressor()
+    "Support Vector Regressor": SVR(),
+    "K-Nearest Neighbors Regressor": KNeighborsRegressor()
 }
 
-# Entrenamiento y evaluación de modelos
-results = {}
+# Entrenar y evaluar modelos
 for name, model in models.items():
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-    mse = mean_squared_error(y_test, y_pred)
-    results[name] = mse
-
-# Resultados
-for name, mse in results.items():
-    print(f"{name}: Mean Squared Error = {mse}")
-
-
+    model_pipeline = Pipeline(steps=[
+        ('preprocessor', preprocessor),
+        ('model', model)
+    ])
+    model_pipeline.fit(X_train, y_train)
+    train_score = model_pipeline.score(X_train, y_train)
+    test_score = model_pipeline.score(X_test, y_test)
+    print(f"{name}:")
+    print(f"  Training R^2 Score: {train_score:.4f}")
+    print(f"  Testing R^2 Score: {test_score:.4f}")
