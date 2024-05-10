@@ -388,33 +388,5 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-# Seleccionar características
-features = vaccines_country_data_df[['total_vaccinations', 'people_vaccinated', 'people_fully_vaccinated', 
-                                      'daily_vaccinations_raw', 'daily_vaccinations', 
-                                      'total_vaccinations_per_hundred', 'people_vaccinated_per_hundred', 
-                                      'people_fully_vaccinated_per_hundred', 'daily_vaccinations_per_million']]
+print(vaccines_country_data_df.columns)
 
-# Variable objetivo
-target = vaccines_country_data_df['country']
-
-# Dividir los datos en conjuntos de entrenamiento y prueba
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)
-
-# Modelos de machine learning
-models = {
-    "Regresión Logística": LogisticRegression(),
-    "Support Vector Machine": SVC(),
-    "Random Forest": RandomForestClassifier(),
-    "Gradient Boosting": GradientBoostingClassifier()
-}
-
-# Entrenar y evaluar los modelos
-results = {}
-for name, model in models.items():
-    model.fit(X_train, y_train)
-    score = model.score(X_test, y_test)
-    results[name] = score
-
-# Mostrar resultados
-for name, score in results.items():
-    print(f"{name}: {score}")
