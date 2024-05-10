@@ -433,8 +433,15 @@ preprocessor = ColumnTransformer(
 # Definir modelos
 models = {
     "Linear Regression": LinearRegression(),
-    "Support Vector Regressor": SVR(),
-    "K-Nearest Neighbors Regressor": KNeighborsRegressor()
+    "Ridge Regression": Ridge(),
+    "Lasso Regression": Lasso(),
+    "ElasticNet": ElasticNet(),
+    "Random Forest": RandomForestRegressor(),
+    "Gradient Boosting": GradientBoostingRegressor(),
+    "AdaBoost": AdaBoostRegressor(),
+    "Support Vector Machine": SVR(),
+    "Neural Network": MLPRegressor(max_iter=1000),
+    "XGBoost": XGBRegressor()
 }
 
 # Entrenar y evaluar modelos
