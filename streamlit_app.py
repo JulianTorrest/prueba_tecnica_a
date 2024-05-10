@@ -328,6 +328,13 @@ if len(numeric_cols) > 0:
 else:
     st.write("No hay columnas numéricas en este DataFrame.")
 
+# Función para codificar variables categóricas
+def encode_categorical(df, categorical_columns):
+    encoder = OneHotEncoder(sparse=False, drop='first')
+    encoded_features = encoder.fit_transform(df[categorical_columns])
+    encoded_df = pd.DataFrame(encoded_features, columns=encoder.get_feature_names(categorical_columns))
+    return encoded_df
+    
 # Encodificar variables categóricas
 categorical_columns = ['Country']
 encoded_df = encode_categorical(vaccines_country_data_df, categorical_columns)
@@ -336,3 +343,4 @@ if encoded_df is not None:
     st.write(encoded_df)
 else:
     st.write("La codificación de variables categóricas no se pudo realizar debido a valores faltantes o columnas no categóricas.")
+
