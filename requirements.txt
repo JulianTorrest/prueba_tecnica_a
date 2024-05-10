@@ -2,5 +2,5 @@ pandas
 seaborn
 matplotlib
 requests
-scikit-learn
+scikit-learn==1.4.2
 streamlit
