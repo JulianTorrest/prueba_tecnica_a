@@ -477,6 +477,9 @@ plt.xlim(0, 1)  # Establecer límites para el eje x
 plt.gca().invert_yaxis()  # Invertir el eje y para que el modelo con el puntaje más alto esté en la parte superior
 plt.show()
 
+# Mostrar el gráfico en Streamlit
+st.pyplot(plt)
+
 # Crear un gráfico de barras para el error cuadrático medio (MSE)
 plt.figure(figsize=(10, 6))
 plt.barh(model_names, mse_scores, color='salmon')
@@ -485,6 +488,9 @@ plt.ylabel('Modelos')
 plt.title('Error Cuadrático Medio (MSE)')
 plt.gca().invert_yaxis()  # Invertir el eje y para que el modelo con el MSE más bajo esté en la parte superior
 plt.show()
+
+# Mostrar el gráfico en Streamlit
+st.pyplot(plt)
 
 # Encontrar el mejor modelo
 best_model_name = max(results, key=lambda x: results[x]["Testing R^2 Score"])
