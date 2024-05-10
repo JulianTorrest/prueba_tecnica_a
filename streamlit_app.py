@@ -319,58 +319,32 @@ covid_testing_all_observations_df.drop(['ISO code', 'Source URL'], axis=1, inpla
 # Eliminación de columnas irrelevantes
 covid_testing_latest_data_source_details_df.drop(['ISO code', 'Source URL', 'General source label'], axis=1, inplace=True)
 
-# Gráfico de barras para contar valores únicos en las columnas categóricas
-def plot_categorical_columns(df):
+# Función para mostrar gráficos EDA en Streamlit
+def plot_eda_streamlit(df, name):
+    st.write(f"## Análisis exploratorio de {name}")
+
+    # Gráfico de barras para columnas categóricas
+    st.write("### Gráfico de barras para columnas categóricas")
     categorical_columns = df.select_dtypes(include=['object']).columns
     for column in categorical_columns:
-        plt.figure(figsize=(10, 6))
-        sns.countplot(data=df, y=column)
-        plt.title(f'Count of unique values in {column}')
-        plt.xlabel('Count')
-        plt.ylabel(column)
-        plt.show()
+        st.write(f"#### {column}")
+        st.bar_chart(df[column].value_counts())
 
-# Histograma para las columnas numéricas
-def plot_numeric_columns(df):
-    numeric_columns = df.select_dtypes(include=['int64', 'float64']).columns
-    for column in numeric_columns:
-        plt.figure(figsize=(10, 6))
-        sns.histplot(data=df, x=column, kde=True)
-        plt.title(f'Histogram of {column}')
-        plt.xlabel(column)
-        plt.ylabel('Frequency')
-        plt.show()
-
-# Diagrama de dispersión para pares de columnas numéricas
-def plot_numeric_correlation(df):
-    numeric_columns = df.select_dtypes(include=['int64', 'float64']).columns
-    sns.pairplot(df[numeric_columns])
-    plt.show()
-
-# Mostrar gráficos EDA para cada DataFrame
-def plot_eda(df, name):
-    st.write(f"## Análisis exploratorio de {name}")
-    st.write("### Gráfico de barras para columnas categóricas")
-    plot_categorical_columns(df)
+    # Histograma para columnas numéricas
     st.write("### Histograma para columnas numéricas")
-    plot_numeric_columns(df)
-    st.write("### Diagrama de dispersión para pares de columnas numéricas")
-    plot_numeric_correlation(df)
+    numeric_columns = df.select_dtypes(include=['int64', 'float64']).columns
+    if len(numeric_columns) >= 2:
+        for column in numeric_columns:
+            st.write(f"#### {column}")
+            st.line_chart(df[column].value_counts())
 
-# Graficar EDA para el DataFrame vaccines_country_data_df
-plot_eda(vaccines_country_data_df, "vaccines_country_data_df")
-
-# Graficar EDA para el DataFrame locations_vaccines_df
-plot_eda(locations_vaccines_df, "locations_vaccines_df")
-
-# Graficar EDA para el DataFrame vaccinations_by_manufacturer_df
-plot_eda(vaccinations_by_manufacturer_df, "vaccinations_by_manufacturer_df")
-
-# Graficar EDA para el DataFrame covid_testing_all_observations_df
-plot_eda(covid_testing_all_observations_df, "covid_testing_all_observations_df")
-
-# Graficar EDA para el DataFrame covid_testing_latest_data_source_details_df
-plot_eda(covid_testing_latest_data_source_details_df, "covid_testing_latest_data_source_details_df")
+        # Diagrama de dispersión para pares de columnas numéricas
+        st.write("### Diagrama de dispersión para pares de columnas numéricas")
+        st.write("#### Pairplot")
+        sns.pairplot(df[numeric_columns])
+        st.pyplot(plt)  # Mostrar el pairplot en Streamlit
+    else:
+        st.write("No hay suficientes columnas numéricas para generar el pairplot.")
 
 # Mostrar gráficos EDA para cada DataFrame en Streamlit
 plot_eda_streamlit(vaccines_country_data_df, "vaccines_country_data_df")
@@ -378,6 +352,7 @@ plot_eda_streamlit(locations_vaccines_df, "locations_vaccines_df")
 plot_eda_streamlit(vaccinations_by_manufacturer_df, "vaccinations_by_manufacturer_df")
 plot_eda_streamlit(covid_testing_all_observations_df, "covid_testing_all_observations_df")
 plot_eda_streamlit(covid_testing_latest_data_source_details_df, "covid_testing_latest_data_source_details_df")
+
 
 # Verificar si hay columnas numéricas
 numeric_cols = covid_testing_latest_data_source_details_df.select_dtypes(include=['float64', 'int64']).columns
