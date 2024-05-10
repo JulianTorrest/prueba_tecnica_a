@@ -461,6 +461,30 @@ for name, model in models.items():
         "Testing R^2 Score": test_score,
         "Mean Squared Error": mse
     }
+# Obtener los nombres de los modelos y sus resultados
+model_names = list(results.keys())
+train_scores = [results[model]["Training R^2 Score"] for model in model_names]
+test_scores = [results[model]["Testing R^2 Score"] for model in model_names]
+mse_scores = [results[model]["Mean Squared Error"] for model in model_names]
+
+# Crear un gráfico de barras para los puntajes de R^2
+plt.figure(figsize=(10, 6))
+plt.barh(model_names, test_scores, color='skyblue')
+plt.xlabel('R^2 Score')
+plt.ylabel('Modelos')
+plt.title('Puntajes de R^2 en el conjunto de prueba')
+plt.xlim(0, 1)  # Establecer límites para el eje x
+plt.gca().invert_yaxis()  # Invertir el eje y para que el modelo con el puntaje más alto esté en la parte superior
+plt.show()
+
+# Crear un gráfico de barras para el error cuadrático medio (MSE)
+plt.figure(figsize=(10, 6))
+plt.barh(model_names, mse_scores, color='salmon')
+plt.xlabel('Mean Squared Error')
+plt.ylabel('Modelos')
+plt.title('Error Cuadrático Medio (MSE)')
+plt.gca().invert_yaxis()  # Invertir el eje y para que el modelo con el MSE más bajo esté en la parte superior
+plt.show()
 
 # Encontrar el mejor modelo
 best_model_name = max(results, key=lambda x: results[x]["Testing R^2 Score"])
